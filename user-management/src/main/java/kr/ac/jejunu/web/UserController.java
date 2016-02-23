@@ -1,4 +1,4 @@
-package kr.ac.jejunu.kr.ac.jejunu.web;
+package kr.ac.jejunu.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
