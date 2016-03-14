@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/jeju
+    username: jeju
+    password: jejupw
+    driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    cache: false

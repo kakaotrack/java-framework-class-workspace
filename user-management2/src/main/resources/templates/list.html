@@ -1,7 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>사용자 등록</title>
 	<link href="/menu.css" rel="stylesheet" type="text/css" media="all" />
 </head>
@@ -25,19 +23,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>hyh0408 </td>
-					<td>허윤호 </td>
+				<tr data-th-each="user : ${userList}">
+					<td data-th-text="${user.id}" />
+					<td data-th-text="${user.name}" />
 					<td><a href="modify?id=">수정</a></td>
 					<td><a href="remove?id=">삭제</a></td>
 				</tr>
-					<td>hyh0408 </td>
-					<td>허윤호 </td>
-					<td><a href="modify?id=">수정</a></td>
-					<td><a href="remove?id=">삭제</a></td>
-				<tr>
-				</tr>
-			</tbody>	
+			</tbody>
 		</table>
 	</div>
 </body>
