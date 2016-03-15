@@ -1,0 +1,11 @@
+task hello << {
+	println 'hello'
+}
+
+task hello2(dependsOn: hello) << {
+	println 'hello2'
+}
+
+task hello3(dependsOn: [hello, hello2]) << {
+	println 'hello3'
+}
