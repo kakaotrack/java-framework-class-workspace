@@ -1,11 +1,23 @@
-task hello << {
-	println 'hello'
+defaultTasks 'hello1', 'hello2'
+
+4.times { counter -> 
+	task "hello$counter" << {
+		println "Hello$counter"
+	}
 }
 
-task hello2(dependsOn: hello) << {
-	println 'hello2'
+hello3.doFirst {
+	println 'hello3 first'
 }
 
-task hello3(dependsOn: [hello, hello2]) << {
-	println 'hello3'
+hello3.doLast {
+	println 'hello3 last'
+}
+
+task myTask {
+	ext.myProperty = "myValue"
+}
+
+task printTask << {
+	println myTask.myProperty
 }
