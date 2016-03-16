@@ -1,2 +1,1 @@
-include 'projectA'
-include 'projectB'
+include 'projectA', 'projectB'
