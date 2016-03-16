@@ -1,0 +1,39 @@
+File configFile = file('resources/pom.xml')
+configFile = file(configFile.absolutePath)
+configFile = file(new File('resources/pom.xml'))
+
+FileCollection collection = files('resources/pom.xml', new File('resources/a.txt'), ['resources/a.txt', 'resources/pom.xml'])
+
+collection.each { File file ->
+	println file.name
+}
+
+Set set = collection.files
+Set set2 = collection as Set
+List list = collection as List
+
+def union = collection + files('resources/file3.txt')
+def different = collection - files('resources/file3.txt')
+
+task list << {
+	def collections = []
+	rootDir.eachFileRecurse {
+		collections += it
+	}
+	collections.collect { relativePath(it)}.sort().each{println it}
+}
+	
+
+task copy(type: Copy) {
+	from 'resources'
+	from 'build'
+	into 'target'
+	include '**/*.txt'
+	exclude { detail ->
+		detail.file.name.endsWith('.xml')	
+	}
+	rename '(.+)-staging-(.+)', '$1$2'
+	expand(copyright: '2009', version: '2.3.1')
+}
+
+
