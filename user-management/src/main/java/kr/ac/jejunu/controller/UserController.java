@@ -17,10 +17,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("list")
-    public List<User> list() {
-        List<User>  userList = userService.list();
-        return userList;
+    @RequestMapping({"/", "list"})
+    public String list(ModelMap model) {
+        model.addAttribute(userService.list());
+        return "list";
     }
 
     @RequestMapping("save")

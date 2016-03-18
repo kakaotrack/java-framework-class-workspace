@@ -1,6 +1,10 @@
 group 'kr.ac.jejunu'
 version '1.0-SNAPSHOT'
 
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply plugin: 'idea'
+
 buildscript {
     repositories {
         jcenter()
@@ -10,10 +14,6 @@ buildscript {
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.3.2.RELEASE'
     }
 }
-
-apply plugin: 'java'
-apply plugin: 'spring-boot'
-apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 
