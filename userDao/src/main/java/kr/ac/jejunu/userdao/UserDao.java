@@ -9,8 +9,8 @@ public class UserDao {
 
     private final ConnectionMaker connectionMaker;
 
-    public UserDao() {
-        this.connectionMaker = new JejuConnectionMaker();
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
     }
 
     public User get(Long id) throws ClassNotFoundException, SQLException {
