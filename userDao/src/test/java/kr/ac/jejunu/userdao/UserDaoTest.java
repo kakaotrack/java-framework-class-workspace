@@ -1,6 +1,5 @@
 package kr.ac.jejunu.userdao;
 
-import kr.ac.halla.userdao.HallaUserDao;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -15,7 +14,7 @@ public class UserDaoTest {
 
     @Test
     public void get() throws SQLException, ClassNotFoundException {
-        UserDao userDao = new JejuUserDao();
+        UserDao userDao = new UserDao();
         Long id = 1L;
         String name = "허윤호";
         String password = "1234";
@@ -28,7 +27,7 @@ public class UserDaoTest {
 
     @Test
     public void add() throws SQLException, ClassNotFoundException {
-        UserDao userDao = new JejuUserDao();
+        UserDao userDao = new UserDao();
 
         String name = "헐크";
         String password = "1234";
@@ -49,7 +48,7 @@ public class UserDaoTest {
 
     @Test
     public void hallaGet() throws SQLException, ClassNotFoundException {
-        UserDao userDao = new HallaUserDao();
+        UserDao userDao = new UserDao();
         Long id = 1L;
         String name = "허윤호";
         String password = "1234";
@@ -62,7 +61,7 @@ public class UserDaoTest {
 
     @Test
     public void hallaAdd() throws SQLException, ClassNotFoundException {
-        UserDao userDao = new HallaUserDao();
+        UserDao userDao = new UserDao();
 
         String name = "헐크";
         String password = "1234";

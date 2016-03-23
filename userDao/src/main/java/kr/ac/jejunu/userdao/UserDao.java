@@ -1,16 +1,20 @@
 package kr.ac.jejunu.userdao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by hyh0408 on 2016. 3. 22..
  */
-public abstract class UserDao {
+public class UserDao {
+
+    private final ConnectionMaker connectionMaker;
+
+    public UserDao() {
+        this.connectionMaker = new JejuConnectionMaker();
+    }
+
     public User get(Long id) throws ClassNotFoundException, SQLException {
-        Connection connection = getConnection();
+        Connection connection = connectionMaker.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement("select * from userinfo where id = ?");
         preparedStatement.setLong(1, id);
@@ -31,7 +35,7 @@ public abstract class UserDao {
     }
 
     public Long add(User user) throws ClassNotFoundException, SQLException {
-        Connection connection = getConnection();
+        Connection connection = connectionMaker.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement("insert into userinfo(name, password) values (?, ?)");
         preparedStatement.setString(1, user.getName());
@@ -46,8 +50,6 @@ public abstract class UserDao {
 
         return id;
     }
-
-    protected abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 
 
     private Long getLastInsertId(Connection connection) throws SQLException {
