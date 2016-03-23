@@ -1,11 +1,14 @@
 package kr.ac.jejunu.userdao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by hyh0408 on 2016. 3. 22..
  */
-public class UserDao {
+public abstract class UserDao {
     public User get(Long id) throws ClassNotFoundException, SQLException {
         Connection connection = getConnection();
 
@@ -44,10 +47,8 @@ public class UserDao {
         return id;
     }
 
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost/jeju?characterEncoding=utf-8", "jeju", "jejupw");
-    }
+    protected abstract Connection getConnection() throws ClassNotFoundException, SQLException;
+
 
     private Long getLastInsertId(Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("select last_insert_id()");
