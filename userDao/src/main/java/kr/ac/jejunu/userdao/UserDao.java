@@ -7,10 +7,14 @@ import java.sql.*;
  */
 public class UserDao {
 
-    private final ConnectionMaker connectionMaker;
+    private ConnectionMaker connectionMaker;
 
     public UserDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
+    }
+
+    public UserDao() {
+
     }
 
     public User get(Long id) throws ClassNotFoundException, SQLException {
@@ -51,7 +55,6 @@ public class UserDao {
         return id;
     }
 
-
     private Long getLastInsertId(Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("select last_insert_id()");
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -60,6 +63,15 @@ public class UserDao {
         Long id = resultSet.getLong(1);
         resultSet.close();
         return id;
+    }
+
+
+    public ConnectionMaker getConnectionMaker() {
+        return connectionMaker;
+    }
+
+    public void setConnectionMaker(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
     }
 
 }
