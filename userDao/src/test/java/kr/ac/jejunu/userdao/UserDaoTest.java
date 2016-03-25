@@ -1,6 +1,5 @@
 package kr.ac.jejunu.userdao;
 
-import kr.ac.halla.userDao.HallaConnectionMaker;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -21,6 +20,7 @@ public class UserDaoTest {
     @Before
     public void setup() {
         ApplicationContext context = new GenericXmlApplicationContext("daoFactory.xml");
+//        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
         userDao = context.getBean("userDao", UserDao.class);
     }
 
