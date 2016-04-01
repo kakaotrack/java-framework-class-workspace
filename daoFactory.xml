@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" >
+
+
+    <bean id="userDao" class="kr.ac.jejunu.userdao.UserDao">
+        <constructor-arg ref="dataSource" />
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource" >
+        <property name="driverClass"  value="com.mysql.jdbc.Driver" />
+        <property name="url"  value="jdbc:mysql://localhost:3306/jeju?characterEncoding=utf-8" />
+        <property name="username"  value="jeju" />
+        <property name="password"  value="jejupw" />
+    </bean>
+
+
+</beans>
+
