@@ -8,7 +8,7 @@ import java.sql.*;
  */
 public class UserDao {
 
-    private DataSource dataSource;
+    private JdbcContext jdbcContext;
 
     public UserDao() {
 
@@ -16,172 +16,31 @@ public class UserDao {
 
     public User get(Long id) throws SQLException {
 
-        User user = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try {
-            connection = dataSource.getConnection();
-
-            StatementStrategy statementStrategy = new GetUserStatementStrategy();
-            preparedStatement = statementStrategy.makePreparedStatement(id, connection);
-
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                user = new User();
-                user.setId(resultSet.getLong("id"));
-                user.setName(resultSet.getString("name"));
-                user.setPassword(resultSet.getString("password"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            if (resultSet != null)
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            if (preparedStatement != null)
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            if (connection != null)
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-        }
-
-
+        StatementStrategy statementStrategy = new GetUserStatementStrategy(id);
+        User user = jdbcContext.jdbcContextWithStatementStrategyForSelect(statementStrategy);
         return user;
     }
 
+
     public Long add(User user) throws ClassNotFoundException, SQLException {
-        Long id = null;
-
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = dataSource.getConnection();
-
-            StatementStrategy statementStrategy = new AddUserStatementStrategy();
-            preparedStatement = statementStrategy.makePreparedStatement(user, connection);
-
-            preparedStatement.executeUpdate();
-            id = getLastInsertId(connection);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (preparedStatement != null)
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            if (connection != null)
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-        }
-
-
+        StatementStrategy statementStrategy = new AddUserStatementStrategy(user);
+        Long id = jdbcContext.jdbcContextWithStatementStrategyForInsert(statementStrategy);
         return id;
     }
 
     public void delete(Long id) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = dataSource.getConnection();
-
-            StatementStrategy statementStrategy = new DeleteUserStatementStrategy();
-            preparedStatement = statementStrategy.makePreparedStatement(id, connection);
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (preparedStatement != null)
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            if (connection != null)
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-        }
+        StatementStrategy statementStrategy = new DeleteUserStatementStrategy(id);
+        jdbcContext.jdbcContextWithStatementStrategyForUpdate(statementStrategy);
     }
-
 
 
     public void update(User user) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = dataSource.getConnection();
-
-            StatementStrategy statementStrategy = new UpdateUserStatementStrategy();
-            preparedStatement = statementStrategy.makePreparedStatement(user, connection);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (preparedStatement != null)
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            if (connection != null)
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-        }
+        StatementStrategy statementStrategy = new UpdateUserStatementStrategy(user);
+        jdbcContext.jdbcContextWithStatementStrategyForUpdate(statementStrategy);
     }
 
-    private Long getLastInsertId(Connection connection) throws SQLException {
-        ResultSet resultSet = null;
-        Long id = null;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select last_insert_id()");
-            resultSet = preparedStatement.executeQuery();
-            resultSet.next();
 
-            id = resultSet.getLong(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (resultSet != null)
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            if (connection != null)
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-        }
-        return id;
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public void setJdbcContext(JdbcContext jdbcContext) {
+        this.jdbcContext = jdbcContext;
     }
 }

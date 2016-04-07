@@ -8,6 +8,10 @@
 
 	<bean id="userDao" class="kr.ac.jejunu.userdao.UserDao">
 		<!--<constructor-arg ref="connectionMaker" />-->
+		<property name="jdbcContext" ref="jdbcContext" />
+	</bean>
+
+	<bean id="jdbcContext" class="kr.ac.jejunu.userdao.JdbcContext">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
