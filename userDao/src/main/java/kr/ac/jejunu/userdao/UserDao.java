@@ -24,8 +24,8 @@ public class UserDao {
         try {
             connection = dataSource.getConnection();
 
-            preparedStatement = connection.prepareStatement("select * from userinfo where id = ?");
-            preparedStatement.setLong(1, id);
+            StatementStrategy statementStrategy = new GetUserStatementStrategy();
+            preparedStatement = statementStrategy.makePreparedStatement(id, connection);
 
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -63,18 +63,17 @@ public class UserDao {
     }
 
     public Long add(User user) throws ClassNotFoundException, SQLException {
+        Long id = null;
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        Long id = null;
         try {
             connection = dataSource.getConnection();
 
-            preparedStatement = connection.prepareStatement("insert into userinfo(name, password) values (?, ?)");
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
+            StatementStrategy statementStrategy = new AddUserStatementStrategy();
+            preparedStatement = statementStrategy.makePreparedStatement(user, connection);
 
             preparedStatement.executeUpdate();
-
             id = getLastInsertId(connection);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -103,8 +102,8 @@ public class UserDao {
         try {
             connection = dataSource.getConnection();
 
-            preparedStatement = connection.prepareStatement("delete from userinfo where id = ?");
-            preparedStatement.setLong(1, id);
+            StatementStrategy statementStrategy = new DeleteUserStatementStrategy();
+            preparedStatement = statementStrategy.makePreparedStatement(id, connection);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -125,6 +124,34 @@ public class UserDao {
         }
     }
 
+
+
+    public void update(User user) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = dataSource.getConnection();
+
+            StatementStrategy statementStrategy = new UpdateUserStatementStrategy();
+            preparedStatement = statementStrategy.makePreparedStatement(user, connection);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null)
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+    }
 
     private Long getLastInsertId(Connection connection) throws SQLException {
         ResultSet resultSet = null;

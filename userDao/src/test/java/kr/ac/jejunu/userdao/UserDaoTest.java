@@ -54,6 +54,30 @@ public class UserDaoTest {
     }
 
     @Test
+    public void update() throws SQLException, ClassNotFoundException {
+        String name = "헐크";
+        String password = "1234";
+
+        String changeName = "허윤호";
+        String changePassword = "1111";
+
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
+
+        Long id = userDao.add(user);
+
+        user.setId(id);
+        user.setName(changeName);
+        user.setPassword(changePassword);
+
+        userDao.update(user);
+
+        User resultUser = userDao.get(id);
+        validate(id, changeName, changePassword, resultUser);
+    }
+
+    @Test
     public void delete() throws SQLException, ClassNotFoundException {
         String name = "헐크";
         String password = "1234";
