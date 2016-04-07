@@ -1,5 +1,8 @@
 package kr.ac.jejunu.userdao;
 
+import static org.hamcrest.MatcherAssert.*;
+
+import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -7,8 +10,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.sql.SQLException;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by hyh0408 on 2016. 3. 22..
@@ -32,9 +33,7 @@ public class UserDaoTest {
         String password = "1234";
 
         User user = userDao.get(id);
-        assertEquals(id, user.getId());
-        assertEquals(name, user.getName());
-        assertEquals(password, user.getPassword());
+        validate(id, name, password, user);
     }
 
     @Test
@@ -50,10 +49,14 @@ public class UserDaoTest {
 
 
         User resultUser = userDao.get(id);
-        assertEquals(id, resultUser.getId());
-        assertEquals(name, resultUser.getName());
-        assertEquals(password, resultUser.getPassword());
+        validate(id, name, password, resultUser);
 
+    }
+
+    private void validate(Long id, String name, String password, User user) {
+        assertThat(id, is(user.getId()));
+        assertThat(name, is(user.getName()));
+        assertThat(password, is(user.getPassword()));
     }
 }
 
