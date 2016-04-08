@@ -53,7 +53,7 @@ public class JdbcContext {
         return user;
     }
 
-    Long jdbcContextWithStatementStrategyForInsert(StatementStrategy statementStrategy) {
+    Long jdbcContextWithStatementStrategyForInsert(StatementStrategy statementStrategy) throws SQLException {
         Long id = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -66,6 +66,7 @@ public class JdbcContext {
             id = getLastInsertId(connection);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
             if (preparedStatement != null)
                 try {
@@ -83,7 +84,7 @@ public class JdbcContext {
         return id;
     }
 
-    void jdbcContextWithStatementStrategyForUpdate(StatementStrategy statementStrategy) {
+    void jdbcContextWithStatementStrategyForUpdate(StatementStrategy statementStrategy) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -92,6 +93,7 @@ public class JdbcContext {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
             if (preparedStatement != null)
                 try {
@@ -119,6 +121,7 @@ public class JdbcContext {
             id = resultSet.getLong(1);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
             if (resultSet != null)
                 try {

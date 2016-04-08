@@ -34,7 +34,7 @@ public class UserDao {
         return id;
     }
 
-    public void delete(Long id) {
+    public void delete(Long id) throws SQLException {
         jdbcContext.jdbcContextWithStatementStrategyForUpdate((Connection connection) -> {
             PreparedStatement preparedStatement = connection.prepareStatement("delete from userinfo where id = ?");
             preparedStatement.setLong(1, id);
@@ -43,7 +43,7 @@ public class UserDao {
     }
 
 
-    public void update(User user) {
+    public void update(User user) throws SQLException {
         jdbcContext.jdbcContextWithStatementStrategyForUpdate((Connection connection) -> {
             PreparedStatement preparedStatement = connection.prepareStatement("update userinfo set name=?, password=? where id = ?");
             preparedStatement.setString(1, user.getName());
