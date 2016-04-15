@@ -21,7 +21,6 @@ public class UserDaoTest {
     @Before
     public void setup() {
         ApplicationContext context = new GenericXmlApplicationContext("daoFactory.xml");
-//        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
         userDao = context.getBean("userDao", UserDao.class);
     }
 

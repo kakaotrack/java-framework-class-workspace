@@ -8,10 +8,10 @@
 
 	<bean id="userDao" class="kr.ac.jejunu.userdao.UserDao">
 		<!--<constructor-arg ref="connectionMaker" />-->
-		<property name="jdbcContext" ref="jdbcContext" />
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 
-	<bean id="jdbcContext" class="kr.ac.jejunu.userdao.JdbcContext">
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
