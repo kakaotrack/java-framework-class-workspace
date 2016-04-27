@@ -1,0 +1,41 @@
+group 'kr.ac.jejunu'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.4'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.tomcat'
+
+sourceCompatibility = 1.8
+
+ext {
+    springVersion = '4.2.5.RELEASE'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def tomcatVersion = '8.0.21'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'org.springframework', name: 'spring-context', version: springVersion
+    compile group: 'org.springframework', name: 'spring-jdbc', version: springVersion
+}
+
+tomcat {
+    httpPort = 8080
+    contextPath = '/'
+}
