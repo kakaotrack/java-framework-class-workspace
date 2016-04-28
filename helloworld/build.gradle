@@ -48,3 +48,8 @@ tomcat {
     httpPort = 8080
     contextPath = '/'
 }
+
+tomcatRun {
+    reloadable = true
+}
+
