@@ -19,6 +19,9 @@ sourceCompatibility = 1.8
 
 ext {
     springVersion = '4.2.5.RELEASE'
+    servletVersion = '3.1.0'
+    slf4jVersion = '1.7.21'
+    logbackVersion = '1.1.7'
 }
 
 repositories {
@@ -33,6 +36,12 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'org.springframework', name: 'spring-context', version: springVersion
     compile group: 'org.springframework', name: 'spring-jdbc', version: springVersion
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: servletVersion
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
+    runtime group: 'ch.qos.logback', name: 'logback-classic', version:logbackVersion
+
+
+
 }
 
 tomcat {
