@@ -7,11 +7,13 @@ import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
 /**
  * Created by hyh0408 on 2016. 4. 28..
  */
+@WebServlet(urlPatterns = "/hello")
 public class HelloServlet extends GenericServlet{
 
     private final static Logger logger = LoggerFactory.getLogger(HelloServlet.class);

@@ -5,11 +5,13 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by hyh0408 on 2016. 4. 28..
  */
+@WebListener
 public class HelloRequestListener implements ServletRequestListener{
 
     private final static Logger logger = LoggerFactory.getLogger(HelloRequestListener.class);
