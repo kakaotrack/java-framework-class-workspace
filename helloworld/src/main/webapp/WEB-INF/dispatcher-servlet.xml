@@ -12,6 +12,7 @@
         <beans:property name="prefix" value="/WEB-INF/views/"/>
         <beans:property name="suffix" value=".jsp"/>
     </beans:bean>
+    <beans:bean class="org.springframework.web.servlet.handler.SimpleServletHandlerAdapter" />
     <beans:bean class="org.springframework.web.servlet.mvc.support.ControllerBeanNameHandlerMapping"/>
     <beans:bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
     <beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" >

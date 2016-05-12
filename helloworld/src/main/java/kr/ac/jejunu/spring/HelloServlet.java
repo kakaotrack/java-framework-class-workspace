@@ -1,4 +1,4 @@
-package kr.ac.jejunu.servlet;
+package kr.ac.jejunu.spring;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by hyh0408 on 2016. 4. 28..
  */
-@WebServlet(urlPatterns = "/hello")
+@Controller
 public class HelloServlet extends GenericServlet{
 
     private final static Logger logger = LoggerFactory.getLogger(HelloServlet.class);
