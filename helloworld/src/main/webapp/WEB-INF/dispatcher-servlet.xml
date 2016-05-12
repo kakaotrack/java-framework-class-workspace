@@ -14,4 +14,11 @@
     </beans:bean>
     <beans:bean class="org.springframework.web.servlet.mvc.support.ControllerBeanNameHandlerMapping"/>
     <beans:bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+    <beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" >
+		<beans:property name="mappings">
+			<beans:props>
+				<beans:prop key="/a/b/*">abc</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
 </beans:beans>
