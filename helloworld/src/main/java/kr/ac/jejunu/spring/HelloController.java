@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -99,6 +100,14 @@ public class HelloController {
     @RequestMapping("/sessionattributevalue")
     public String hello9(HelloModel helloModel) {
         return "/spring/hellomodel";
+    }
+
+    @RequestMapping("/returnmodel")
+    public HelloModel hello10() {
+        HelloModel helloModel = new HelloModel();
+        helloModel.setHello("Hi");
+        helloModel.setName("Hulk");
+        return helloModel;
     }
 
 }
