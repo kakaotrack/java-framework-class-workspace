@@ -6,6 +6,7 @@
     <class name="kr.ac.jejunu.model.User" table="userinfo">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
+            <generator class="identity" />
         </id>
         <property name="name" type="java.lang.String">
             <column name="name" />
