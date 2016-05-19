@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014. 5. 16 ???? 12:36:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="kr.ac.jejunu.model.User" table="userinfo">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" />
+        </property>
+    </class>
+</hibernate-mapping>
