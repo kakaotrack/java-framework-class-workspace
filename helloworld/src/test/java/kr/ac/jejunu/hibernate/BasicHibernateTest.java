@@ -1,7 +1,5 @@
 package kr.ac.jejunu.hibernate;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.*;
 import kr.ac.jejunu.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,11 +9,18 @@ import org.hibernate.cfg.Configuration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by hyh0408 on 2016. 5. 19..
  */
 public class BasicHibernateTest {
+
+    private Logger logger = LoggerFactory.getLogger(BasicHibernateTest.class);
 
     SessionFactory sessionFactory;
 
@@ -53,7 +58,9 @@ public class BasicHibernateTest {
         user.setPassword("1111");
         session.save(user);
 
+        logger.info("**************  get after save(start) ******************");
         User savedUser = session.get(User.class, user.getId());
+        logger.info("**************  get after save(end) ******************");
         assertThat(savedUser.getName(), is(user.getName()));
         assertThat(savedUser.getPassword(), is(user.getPassword()));
 

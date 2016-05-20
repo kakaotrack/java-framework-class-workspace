@@ -9,5 +9,6 @@
         <property name="hibernate.connection.username">jeju</property>
         <property name="hibernate.default_schema">jejunu</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.isolation">2</property>
     </session-factory>
 </hibernate-configuration>
