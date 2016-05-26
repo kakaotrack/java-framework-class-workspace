@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class Comment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @JoinColumn(name = "userinfo_id")
     @ManyToOne
