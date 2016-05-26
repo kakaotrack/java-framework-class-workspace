@@ -6,7 +6,7 @@
     <class name="Comment" table="comment">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="native" />
+            <generator class="identity" />
         </id>
         <many-to-one name="user" column="userinfo_id" />
         <property name="content" type="java.lang.String">

@@ -27,9 +27,11 @@ public class BasicHibernateTest {
 
     @Before
     public void setup() {
-        Configuration configuration = new Configuration().configure("jejunu.cfg.xml");
-        configuration.addResource("User.hbm.xml");
-        configuration.addResource("Comment.hbm.xml");
+        Configuration configuration = new Configuration().configure("jejunu.cfg.xml")
+                .addAnnotatedClass(User.class)
+                .addAnnotatedClass(Comment.class);
+//        configuration.addResource("User.hbm.xml");
+//        configuration.addResource("Comment.hbm.xml");
         StandardServiceRegistryBuilder sb = new StandardServiceRegistryBuilder();
         sb.applySettings(configuration.getProperties());
         StandardServiceRegistry standardServiceRegistry = sb.build();

@@ -6,7 +6,7 @@
     <class name="User" table="userinfo">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="native" />
+            <generator class="identity" />
         </id>
         <property name="name" type="java.lang.String">
             <column name="name" />

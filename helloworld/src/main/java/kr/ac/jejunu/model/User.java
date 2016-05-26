@@ -1,5 +1,6 @@
 package kr.ac.jejunu.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
@@ -7,11 +8,18 @@ import java.util.Set;
 /**
  * Created by hyh0408 on 2016. 5. 19..
  */
+@Entity
+@Table(name = "userinfo")
 public class User implements Serializable {
 
+    @Id
+    @GeneratedValue
     private Integer id;
     private String name;
     private String password;
+
+    @JoinColumn(name = "userinfo_id")
+    @OneToMany
     private List<Comment> comments;
 
     public Integer getId() {
