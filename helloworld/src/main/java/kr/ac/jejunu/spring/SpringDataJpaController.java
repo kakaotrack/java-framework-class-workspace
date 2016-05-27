@@ -14,7 +14,6 @@ import java.util.List;
  * Created by hyh0408 on 2016. 5. 26..
  */
 @Controller
-@EnableAutoConfiguration
 @RequestMapping("/data")
 public class SpringDataJpaController {
 
