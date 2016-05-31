@@ -1,5 +1,8 @@
 package kr.ac.jejunu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +19,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
 //    @JoinColumn(name = "userinfo_id")

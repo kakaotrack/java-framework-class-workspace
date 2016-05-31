@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -33,8 +34,8 @@ public class SpringBootController {
     }
 
     @RequestMapping(value = "/comment/{id}", method = {RequestMethod.GET})
-    public ResponseEntity<?> save(@PathVariable("id") Integer id) {
+    public ResponseEntity<?> get(@PathVariable("id") Integer id) {
         Comment result = commentRepository.findOne(id);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.NOT_ACCEPTABLE);
     }
 }
