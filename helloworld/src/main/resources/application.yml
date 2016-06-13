@@ -3,6 +3,7 @@ spring:
     cache: false
     prefix: /WEB-INF/views/
     suffix: .jsp
+    enabled: false
   datasource:
     url: jdbc:mysql://localhost/jeju?characterEncoding=utf-8
     username: jeju
@@ -10,3 +11,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   resources:
     static-locations: /WEB-INF/views/spring/resources
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp

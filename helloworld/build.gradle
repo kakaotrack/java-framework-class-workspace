@@ -28,6 +28,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-ws")
+    compile("javax.servlet:jstl")
+    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
     compile('mysql:mysql-connector-java:5.1.37')
     compile group: 'org.codehaus.castor', name: 'castor-core', version: '1.3.3'
     compile group: 'org.codehaus.castor', name: 'castor-xml', version: '1.3.3'
