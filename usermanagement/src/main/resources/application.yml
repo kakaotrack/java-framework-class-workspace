@@ -1,0 +1,8 @@
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:mysql://localhost/jeju?characterEncoding=utf-8
+    username: jeju
+    password: jejupw
+    driver-class-name: com.mysql.jdbc.Driver
