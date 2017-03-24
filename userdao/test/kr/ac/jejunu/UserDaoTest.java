@@ -5,6 +5,9 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.sql.SQLException;
 
@@ -12,11 +15,14 @@ import java.sql.SQLException;
  * Created by hyh0408 on 2017. 3. 15..
  */
 public class UserDaoTest {
-    DaoFactory daoFactory;
+    UserDao userDao;
 
     @Before
     public void setup() {
-        daoFactory = new DaoFactory();
+//        daoFactory = new DaoFactory();
+//        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+        ApplicationContext context = new GenericXmlApplicationContext("daoFactory.xml");
+        userDao = context.getBean("userDao", UserDao.class);
     }
     @Test
     public void get() throws SQLException, ClassNotFoundException {
@@ -24,7 +30,6 @@ public class UserDaoTest {
         String name = "허윤호";
         String password = "1234";
 
-        UserDao userDao = daoFactory.getUserDao();
         User user = userDao.get(id);
         assertThat(id, is(user.getId()));
         assertThat(name, is(user.getName()));
@@ -38,7 +43,6 @@ public class UserDaoTest {
         User user = new User();
         user.setName(name);
         user.setPassword(password);
-        UserDao userDao = daoFactory.getUserDao();
         Long id = userDao.add(user);
         User resultUser = userDao.get(id);
         assertThat(id, is(resultUser.getId()));
