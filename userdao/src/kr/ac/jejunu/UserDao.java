@@ -14,6 +14,7 @@ public class UserDao {
     }
 
     public User get(Long id) throws ClassNotFoundException, SQLException {
+
         Connection connection = connectionMaker.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement("select * from userinfo where id = ?");
