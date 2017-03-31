@@ -24,6 +24,7 @@ public class UserDaoTest {
         ApplicationContext context = new GenericXmlApplicationContext("daoFactory.xml");
         userDao = context.getBean("userDao", UserDao.class);
     }
+
     @Test
     public void get() throws SQLException, ClassNotFoundException {
         Long id = 1L;
@@ -48,5 +49,46 @@ public class UserDaoTest {
         assertThat(id, is(resultUser.getId()));
         assertThat(name, is(resultUser.getName()));
         assertThat(password, is(resultUser.getPassword()));
+    }
+
+    @Test
+    public void update() throws SQLException, ClassNotFoundException {
+        String name = "헐크";
+        String password = "1111";
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
+        Long id = userDao.add(user);
+
+        String changedName = "허윤호";
+        String changedPassword = "1234";
+
+        user.setId(id);
+        user.setName(changedName);
+        user.setPassword(changedPassword);
+
+        userDao.update(user);
+
+        User changedUser = userDao.get(id);
+
+        assertThat(id, is(changedUser.getId()));
+        assertThat(changedName, is(changedUser.getName()));
+        assertThat(changedPassword, is(changedUser.getPassword()));
+    }
+
+    @Test
+    public void delete() throws SQLException, ClassNotFoundException {
+        String name = "헐크";
+        String password = "1111";
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
+        Long id = userDao.add(user);
+
+        userDao.delete(id);
+
+        User deletedUser = userDao.get(id);
+
+        assertThat(deletedUser, nullValue());
     }
 }

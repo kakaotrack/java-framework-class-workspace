@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="userDao" class="kr.ac.jejunu.UserDao" >
-        <constructor-arg ref="connectionMaker"/>
+        <property name="connectionMaker" ref="connectionMaker"/>
     </bean>
     <bean id="connectionMaker" class="kr.ac.jejunu.JejuConnectionMaker">
         <property name="id" value="jeju" />
