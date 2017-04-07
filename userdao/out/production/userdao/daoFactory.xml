@@ -3,7 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="userDao" class="kr.ac.jejunu.UserDao" >
-        <property name="dataSource" ref="dataSource"/>
+        <property name="jdbcContext" ref="jdbcContext"/>
+    </bean>
+    <bean id="jdbcContext" class="kr.ac.jejunu.JdbcContext">
+        <property name="dataSource" ref="dataSource" />
     </bean>
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="username" value="jeju" />
