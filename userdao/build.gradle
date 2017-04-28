@@ -1,3 +1,17 @@
+defaultTasks 'hello3'
+
+group 'kr.ac.jejunu'
+version '1.0.0'
+description 'gradle test'
+
+println "name : $name"
+println "project : $project"
+println "description : $description"
+println "projectDir : $projectDir"
+println "buildDir : $buildDir"
+println "group : $group"
+println "version : $version"
+
 task hello << {
         println 'Hello World!'
 }
@@ -8,4 +22,36 @@ task hello2(dependsOn: hello) << {
 
 task hello3(dependsOn: hello2) << {
         println 'Hello 허윤호!'
+}
+
+4.times { counter ->
+        task "hello${counter + 4}" << {
+                println "Hello ${counter + 4}"
+        }
+}
+
+task myProps {
+        ext.user = "hulk"
+        ext.password = "1234"
+}
+
+task propsPrint {
+        doLast {
+                println myProps.user
+                println myProps.password
+        }
+}
+
+propsPrint.doFirst {
+        println 'FIRST'
+}
+
+ext {
+        springVersion = '4.3.8.RELEASE'
+}
+
+task printSpringVersion {
+        doLast {
+                println springVersion
+        }
 }
