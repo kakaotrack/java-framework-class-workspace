@@ -1,0 +1,11 @@
+task hello << {
+        println 'Hello World!'
+}
+
+task hello2(dependsOn: hello) << {
+        println 'Hello Hulk!'
+}
+
+task hello3(dependsOn: hello2) << {
+        println 'Hello 허윤호!'
+}
