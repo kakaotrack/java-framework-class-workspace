@@ -53,5 +53,6 @@ dependencies {
 
 tomcat {
     httpPort = 8080
+    stopPort = 8081
     contextPath = '/'
 }
