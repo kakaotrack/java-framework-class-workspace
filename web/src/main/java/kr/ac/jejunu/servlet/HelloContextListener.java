@@ -5,10 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 /**
  * Created by hyh0408 on 2017. 5. 9..
  */
+@WebListener
 public class HelloContextListener implements ServletContextListener{
 
     private static Logger logger = LoggerFactory.getLogger(HelloContextListener.class);

@@ -5,11 +5,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
  * Created by hyh0408 on 2017. 5. 9..
  */
+@WebFilter
 public class HelloFilter implements Filter{
 
     private static Logger logger = LoggerFactory.getLogger(HelloFilter.class);
