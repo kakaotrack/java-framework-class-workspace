@@ -25,6 +25,8 @@ ext {
     servletVersion = '3.1.0'
     slf4jVersion = '1.7.21'
     logbackVersion = '1.1.7'
+    jacksonVersion = '2.8.8'
+    castorVersion = '1.4.1'
 }
 
 repositories {
@@ -45,10 +47,16 @@ dependencies {
     compile "org.springframework:spring-expression:${springVersion}"
     compile "org.springframework:spring-jdbc:${springVersion}"
     compile "org.springframework:spring-tx:${springVersion}"
+    compile "org.springframework:spring-webmvc:${springVersion}"
+    compile "org.springframework:spring-oxm:${springVersion}"
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: servletVersion
     compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
     runtime group: 'ch.qos.logback', name: 'logback-classic', version:logbackVersion
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: jacksonVersion
+    compile group: 'org.codehaus.castor', name: 'castor-core', version: castorVersion
+    compile group: 'org.codehaus.castor', name: 'castor-xml', version: castorVersion
 }
 
 tomcat {

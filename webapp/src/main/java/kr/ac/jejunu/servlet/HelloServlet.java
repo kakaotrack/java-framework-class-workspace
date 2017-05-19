@@ -2,6 +2,7 @@ package kr.ac.jejunu.servlet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
@@ -13,8 +14,9 @@ import java.io.IOException;
 /**
  * Created by hyh0408 on 2016. 4. 28..
  */
-@WebServlet(urlPatterns = "/hello")
-public class HelloServlet extends GenericServlet{
+//@WebServlet(urlPatterns = "/hello")
+@Controller("/servlet")
+public class HelloServlet extends GenericServlet {
 
     private final static Logger logger = LoggerFactory.getLogger(HelloServlet.class);
 
