@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
-@Controller("/hello")
+//@Controller("/hello")
 public class HelloServlet extends GenericServlet {
 
     private final static Logger logger = LoggerFactory.getLogger(HelloServlet.class);

@@ -2,5 +2,6 @@
 <html>
 <body>
 <h1>헬로세상아!!!</h1>
+<h1>${hi}</h1>
 </body>
 </html>
