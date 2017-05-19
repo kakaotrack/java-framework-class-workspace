@@ -53,4 +53,12 @@
             </beans:list>
         </beans:property>
     </beans:bean>
+
+    <interceptors>
+        <interceptor>
+            <mapping path="/**/*"/>
+            <beans:bean class="kr.ac.jejunu.spring.HelloInterceptor" />
+        </interceptor>
+    </interceptors>
+
 </beans:beans>
