@@ -30,7 +30,6 @@ public class HelloController {
         return "hi";
     }
 
-
     @GetMapping("/{hi:[a-z]+}/{name:[a-z]+}")
     public String hello3(@PathVariable String hi, @PathVariable String name,  Model model) {
         model.addAttribute("hi", hi + " " + name);
