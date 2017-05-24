@@ -3,21 +3,14 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="kr.ac.jejunu.model">
-    <class name="User" table="userinfo">
+    <class name="Comment" table="comment">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="native" />
         </id>
-        <property name="name" type="java.lang.String">
-            <column name="name" />
+        <many-to-one name="user" column="userinfo_id" />
+        <property name="content" type="java.lang.String">
+            <column name="content" />
         </property>
-        <property name="password" type="java.lang.String">
-            <column name="password" />
-        </property>
-        <bag name="comments">
-            <key column="userinfo_id"/>
-            <one-to-many class="Comment"/>
-        </bag>
     </class>
 </hibernate-mapping>
-
