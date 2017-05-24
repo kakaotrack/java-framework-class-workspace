@@ -8,6 +8,7 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <context:component-scan base-package="kr.ac.jejunu"/>
+    <annotation-driven enable-matrix-variables="true" />
     <!--<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
         <!--<beans:property name="prefix" value="/WEB-INF/views/"/>-->
         <!--<beans:property name="suffix" value=".jsp"/>-->
