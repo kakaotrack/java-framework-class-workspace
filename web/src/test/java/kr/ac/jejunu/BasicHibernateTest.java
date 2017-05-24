@@ -40,4 +40,23 @@ public class BasicHibernateTest {
         session.close();
     }
 
+    @Test
+    public void saveUserTest() {
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        User user = new User();
+        user.setName("testuser");
+        user.setPassword("1111");
+        session.save(user);
+
+        User savedUser = session.get(User.class, user.getId());
+        assertThat(savedUser.getName(), is(user.getName()));
+        assertThat(savedUser.getPassword(), is(user.getPassword()));
+
+        session.getTransaction().commit();
+        session.close();
+    }
+
+
 }
