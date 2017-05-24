@@ -56,6 +56,8 @@ dependencies {
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: jacksonVersion
     compile group: 'org.codehaus.castor', name: 'castor-core', version: castorVersion
     compile group: 'org.codehaus.castor', name: 'castor-xml', version: castorVersion
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
+
 
     runtime group: 'ch.qos.logback', name: 'logback-classic', version:logbackVersion
 }
