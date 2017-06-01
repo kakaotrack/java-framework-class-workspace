@@ -1,7 +1,14 @@
 package kr.ac.jejunu.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Comment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @JoinColumn(name = "userinfo_id")
+    @ManyToOne
     private User user;
     private String content;
 

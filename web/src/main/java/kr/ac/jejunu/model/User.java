@@ -1,14 +1,22 @@
 package kr.ac.jejunu.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+@Entity
+@Table(name = "userinfo")
 public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String password;
+
+    @JoinColumn(name = "userinfo_id")
+    @OneToMany
     private List<Comment> comments;
 
     public Integer getId() {
