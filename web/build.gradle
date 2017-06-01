@@ -57,7 +57,8 @@ dependencies {
     compile group: 'org.codehaus.castor', name: 'castor-core', version: castorVersion
     compile group: 'org.codehaus.castor', name: 'castor-xml', version: castorVersion
     compile 'org.hibernate:hibernate-core:5.2.10.Final'
-
+    compile 'org.springframework.data:spring-data-jpa:1.11.3.RELEASE'
+    compile 'org.hibernate:hibernate-entitymanager:5.2.10.Final'
 
     runtime group: 'ch.qos.logback', name: 'logback-classic', version:logbackVersion
 }
