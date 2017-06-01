@@ -7,3 +7,4 @@ spring:
     username: jeju
     password: jejupw
     driver-class-name: com.mysql.jdbc.Driver
+
