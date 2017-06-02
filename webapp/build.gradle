@@ -52,14 +52,23 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: servletVersion
     compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
-    runtime group: 'ch.qos.logback', name: 'logback-classic', version:logbackVersion
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: jacksonVersion
     compile group: 'org.codehaus.castor', name: 'castor-core', version: castorVersion
     compile group: 'org.codehaus.castor', name: 'castor-xml', version: castorVersion
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
+    compile 'org.springframework.data:spring-data-jpa:1.11.3.RELEASE'
+    compile 'org.hibernate:hibernate-entitymanager:5.2.10.Final'
+
+    runtime group: 'ch.qos.logback', name: 'logback-classic', version:logbackVersion
 }
 
 tomcat {
     httpPort = 8080
+    stopPort = 8081
     contextPath = '/'
+}
+
+tomcatRun {
+    reloadable = true
 }
