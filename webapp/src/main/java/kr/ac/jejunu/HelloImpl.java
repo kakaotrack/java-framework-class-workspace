@@ -3,12 +3,12 @@ package kr.ac.jejunu;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by hyh0408 on 2017. 5. 12..
+ * Created by hyh0408 on 2017. 5. 9..
  */
-@Component("hello")
+@Component
 public class HelloImpl implements Hello{
     @Override
     public String sayHello() {
-        return "Hello";
+        return "Hello!!!";
     }
 }

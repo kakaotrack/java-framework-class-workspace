@@ -1,5 +1,7 @@
 package kr.ac.jejunu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +19,7 @@ public class User implements Serializable {
 
     @JoinColumn(name = "userinfo_id")
     @OneToMany
+    @JsonIgnore
     private List<Comment> comments;
 
     public Integer getId() {

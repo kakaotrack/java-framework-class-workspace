@@ -23,13 +23,12 @@ public class HelloController {
         model.addAttribute("hi", "하이!!!");
     }
 
-    //    @RequestMapping(value = "/hi/{name}", method = RequestMethod.GET)
+//    @RequestMapping(value = "/hi/{name}", method = RequestMethod.GET)
     @GetMapping("/hi/{name}")
     public String hello2(@PathVariable String name, Model model)  {
         model.addAttribute("hi", "하이!!! " + name);
         return "hi";
     }
-
 
     @GetMapping("/{hi:[a-z]+}/{name:[a-z]+}")
     public String hello3(@PathVariable String hi, @PathVariable String name,  Model model) {
@@ -51,7 +50,7 @@ public class HelloController {
 
     @GetMapping("/hellomodel")
     public String hello6(@ModelAttribute HelloModel helloModel, Model model) {
-        model.addAttribute(helloModel);
+        model.addAttribute("hi", helloModel.getHello() + " " + helloModel.getName());
         return "hi";
     }
 
@@ -62,6 +61,7 @@ public class HelloController {
     }
 
     @GetMapping("/hellomodel3")
+    @ModelAttribute
     public HelloModel hello7() {
         HelloModel helloModel = new HelloModel();
         helloModel.setHello("HI");
@@ -87,7 +87,7 @@ public class HelloController {
             session.setAttribute("name", "henry");
         else
             session.setAttribute("name", "hulk");
-        return "redirect://spring/hellomodel4";
+        return "hi";
     }
 
     @GetMapping("/sessionattributes/add")
@@ -101,9 +101,9 @@ public class HelloController {
     public String hello10() {
         return "hi";
     }
-//
-//    @ExceptionHandler(NullPointerException.class)
-//    public String handleException(NullPointerException e) {
-//        return "error";
-//    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public String handleException(NullPointerException e) {
+        return "error";
+    }
 }
