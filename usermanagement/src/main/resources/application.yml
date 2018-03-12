@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: jeju
+    url: jdbc:mysql://localhost/jeju?characterEncoding=utf-8
