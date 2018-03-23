@@ -3,7 +3,6 @@ package kr.ac.jejunu;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,11 +12,12 @@ import java.sql.SQLException;
 public class UserDaoTest {
 
     private UserDao userDao;
+    private DaoFactory daoFactory;
 //    private UserDao hallaUserDao;
 
     @Before
     public void setup() {
-       userDao = new UserDao();
+        userDao = daoFactory.getUserDao();
     }
 
     @Test
