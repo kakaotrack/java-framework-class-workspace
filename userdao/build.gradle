@@ -1,0 +1,25 @@
+group 'kr.ac.jejunu'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+ext.springVersion = '5.0.4.RELEASE'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'mysql:mysql-connector-java:5.1.37'
+    compile "org.springframework:spring-context:${springVersion}"
+    compile "org.springframework:spring-beans:${springVersion}"
+    compile "org.springframework:spring-core:${springVersion}"
+    compile "org.springframework:spring-aop:${springVersion}"
+    compile "org.springframework:spring-expression:${springVersion}"
+    compile "org.springframework:spring-jdbc:${springVersion}"
+    compile "org.springframework:spring-tx:${springVersion}"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
