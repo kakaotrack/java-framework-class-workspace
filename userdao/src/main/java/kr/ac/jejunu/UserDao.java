@@ -1,6 +1,5 @@
 package kr.ac.jejunu;
 
-import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
@@ -11,23 +10,34 @@ public class UserDao {
     }
 
     public User get(int id) throws SQLException {
-        StatementStrategy statementStrategy = new GetUserStatementStrategy(id);
+        StatementStrategy statementStrategy = connection -> {
+            String sql = "select * from userinfo where id = ?";
+            Object[] params = new Object[]{id};
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
+            }
+            return preparedStatement;
+        };
         return jdbcContext.jdbcContextForGet(statementStrategy);
     }
 
     public Integer insert(User user) throws SQLException {
-        StatementStrategy statementStrategy = new InsertUserStatementStrategy(user);
-        return jdbcContext.jdbcContextForInsert(statementStrategy);
+        String sql = "insert into userinfo(name, password) values (?, ?)";
+        Object[] params = new Object[]{user.getName(), user.getPassword()};
+        return jdbcContext.insert(sql, params);
     }
 
     public void update(User user) throws SQLException {
-        StatementStrategy statementStrategy = new UpdateUserStatementStrategy(user);
-        jdbcContext.jdbcContextForUpdate(statementStrategy);
+        String sql = "update userinfo set name = ?, password = ? where id = ?";
+        Object[] params = new Object[]{user.getName(), user.getPassword(), user.getId()};
+        jdbcContext.update(sql, params);
     }
 
     public void delete(Integer id) throws SQLException {
-        StatementStrategy statementStrategy = new DeleteUserStatementStrategy(id);
-        jdbcContext.jdbcContextForUpdate(statementStrategy);
+        String sql = "delete from userinfo where id = ?";
+        Object[] params = new Object[]{id};
+        jdbcContext.update(sql, params);
     }
 
 }
