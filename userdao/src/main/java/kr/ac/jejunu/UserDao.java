@@ -35,7 +35,7 @@ public class UserDao {
         String sql = "insert into userinfo(name, password) values (?, ?)";
         Object[] params = new Object[]{user.getName(), user.getPassword()};
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        int update = jdbcTemplate.update(con -> {
+        jdbcTemplate.update(con -> {
             PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             for (int i = 0; i < params.length; i++) {
                 preparedStatement.setObject(i + 1, params[i]);
