@@ -1,33 +1,52 @@
-group 'kr.ac.jejunu'
-version '1.0.0'
-description 'gradle test'
+task hello
 
-println "name : $name"
-println "project : $project"
-println "path : $path"
-println "description : $description"
-println "projectDir : $projectDir"
-println "buildDir : $buildDir"
-println "group : $group"
-println "version : $version"
+println hello.name
+println project.hello.name
+println tasks.hello.name
+println tasks['hello'].name
 
-def test = "test"
+project('projectA') {
+    task hello2
+}
 
-task hello << {
-    println "hello $test"
+task hello2
+
+println tasks.getByPath('hello2').path
+println tasks.getByPath(':hello2').path
+println tasks.getByPath('projectA:hello2').path
+println tasks.getByPath(':projectA:hello2').path
+
+
+task copy(type: Copy) {
+    from 'build'
+    into 'target'
+    include('*.txt', '*.xml')
 }
 
 
-ext {
-    springVersion = "5.0.4.RELEASE"
-    emailNotification = "build@master.org"
+project('projectA') {
+    task taskX(dependsOn: ':projectB:taskY') << {
+        println 'taskX'
+    }
 }
 
-
-task printProperties << {
-    println springVersion
-    println emailNotification
+project('projectB') {
+    task taskY << {
+        println 'taskY'
+    }
 }
+
+task taskA << {
+    println 'taskA'
+}
+
+task taskB << {
+    println 'taskB'
+}
+
+taskB.mustRunAfter taskA
+
+
 
 //group 'kr.ac.jejunu'
 //version '1.0-SNAPSHOT'
