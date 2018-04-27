@@ -1,50 +1,48 @@
-task hello
+File configFile = file('pom.xml')
+configFile = file(configFile.absolutePath)
+configFile = file(new File('pom.xml'))
 
-println hello.name
-println project.hello.name
-println tasks.hello.name
-println tasks['hello'].name
+FileCollection collection = files('pom.xml', new File('build.sh'), ['build.xml', 'gradlew'])
 
-project('projectA') {
-    task hello2
+collection.each { File file ->
+    println file.name
 }
 
-task hello2
+Set set = collection.files
+Set set2 = collection as Set
+List list = collection as List
 
-println tasks.getByPath('hello2').path
-println tasks.getByPath(':hello2').path
-println tasks.getByPath('projectA:hello2').path
-println tasks.getByPath(':projectA:hello2').path
+def union = collection + files('settings.gradle')
+def different = collection - files('settings.gradle')
+
+task list << {
+    def collections = []
+    rootDir.eachFileRecurse {
+        collections += it
+    }
+    collections.collect { relativePath(it)}.sort().each{println it}
+}
 
 
 task copy(type: Copy) {
+    from '.'
     from 'build'
     into 'target'
-    include('*.txt', '*.xml')
-}
-
-
-project('projectA') {
-    task taskX(dependsOn: ':projectB:taskY') << {
-        println 'taskX'
+    include '*.xml'
+    exclude { detail ->
+        detail.file.name.endsWith('.iml')
     }
 }
-
-project('projectB') {
-    task taskY << {
-        println 'taskY'
-    }
+task copy2(type: Copy) {
+    from '.'
+    from 'build'
+    into 'target'
+    include '*staging*'
+    rename '(.+)-staging-(.+)', '$1$2'
+    expand(copyright: '2009', version: '2.3.1')
 }
 
-task taskA << {
-    println 'taskA'
-}
 
-task taskB << {
-    println 'taskB'
-}
-
-taskB.mustRunAfter taskA
 
 
 
