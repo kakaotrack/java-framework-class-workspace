@@ -2,4 +2,5 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: jeju
-    url: jdbc:mysql://localhost/jeju?characterEncoding=utf-8
+    url: jdbc:mysql://192.168.0.54/jeju?characterEncoding=utf-8
+    password: jejupw

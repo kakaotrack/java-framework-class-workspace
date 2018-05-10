@@ -17,7 +17,7 @@ apply plugin: 'io.spring.dependency-management'
 
 group = 'kr.ac.jejunu'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 9
+sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()

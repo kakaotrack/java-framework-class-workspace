@@ -1,0 +1,33 @@
+group 'kr.ac.jejunu'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+ext {
+    springVersion = '5.0.4.RELEASE'
+    servletVersion = '3.1.0'
+    slf4jVersion = '1.7.25'
+    logbackVersion = '1.2.3'
+
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'mysql:mysql-connector-java:5.1.37'
+    compile "org.springframework:spring-context:${springVersion}"
+    compile "org.springframework:spring-jdbc:${springVersion}"
+    compile group: 'org.springframework.integration', name: 'spring-integration-groovy', version: "${springVersion}"
+    compileOnly 'org.projectlombok:lombok:1.16.20'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: servletVersion
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
+    runtime group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
+}
+
