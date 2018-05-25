@@ -1,6 +1,7 @@
 package kr.ac.jejunu.spring;
 
 import kr.ac.jejunu.hello.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.io.IOException;
 
 @RequestMapping("/user")
 @Controller
+@Slf4j
 public class UserController {
     @GetMapping("/servlet")
     public void servlet(HttpServletRequest request, HttpServletResponse response,
@@ -79,5 +81,41 @@ public class UserController {
         return new User();
     }
 
+    @PostMapping
+    public void user(User user) {
+        log.info("******** void test user ********");
+    }
+
+    @GetMapping("/string")
+    public String returnStringTest() {
+        return "user";
+    }
+
+    @GetMapping("/redirect")
+    public String redirectStringTest() {
+        return "redirect:/user";
+    }
+
+    @GetMapping("/forward")
+    public String forwardStringTest() {
+        return "forward:/user";
+    }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
