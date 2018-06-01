@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>사용자 관리</title>
+    <link href="/menu.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="/jquery.min.js"></script>
+</head>
+<body>
+<div id="Header">
+    사용자 관리
+</div>
+<div id="Menu">
+    <a href="/list">목록보기</a><br/>
+    <a href="/create">생성하기</a>
+</div>
+<div id="Content">
+    <input id="id" type="hidden" name="id"/>
+    <fieldset>
+        <legend>사용자 등록</legend>
+        <p>
+            <label>이름</label>
+            <input id="name" name="name"/>
+        </p>
+        <p>
+            <label>암호</label>
+            <input id="password" type="password" name="password"/>
+        </p>
+        <p>
+            <input id="save" type="button" value="저장"/>
+        </p>
+    </fieldset>
+</div>
+<script>
+    var host = '/api/user';
+
+    function getUrlParams() {
+        var params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+            params[key] = value;
+        });
+        return params;
+    }
+
+    function save() {
+        var user = {
+            id: $('#id').val(),
+            name: $('#name').val(),
+            password: $('#password').val()
+        };
+        var method = 'POST';
+        if(user.id)
+            method = 'PUT';
+        requestData(method, user);
+        return false;
+    }
+
+    function requestData(method, data) {
+        $.ajax({
+            url: host,
+            method: method,
+            contentType: "application/json",
+            data: JSON.stringify(data)
+        }).done(function () {
+            window.location.href = 'list';
+        });
+    }
+
+
+    $(document).ready(function () {
+        var params = getUrlParams();
+        if (params.id) {
+            $.get(host + "/" + params.id, function (user) {
+                $('#id').val(user.id);
+                $('#name').val(user.name);
+                $('#password').val('');
+            });
+        }
+        $('#save').on("click", save);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>사용자 관리</title>
+    <link href="/menu.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="/jquery.min.js"></script>
+</head>
+<body>
+<div id="Header">
+    사용자 관리
+</div>
+<div id="Menu">
+    <a href="list">목록보기</a><br/>
+    <a href="edit">생성하기</a>
+</div>
+<div id="Content">
+    <table>
+        <caption>사용목록</caption>
+        <thead>
+        <tr>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script>
+    var host = '/api/user';
+    $(document).ready(function () {
+        $.get(host + "/list", function (userList) {
+            $.each(userList, function (index, value) {
+                $("tbody").append(
+                    '\
+                    <tr> \
+                    <td>' + value.id + '</td> \
+                    <td>' + value.name + '</td> \
+                    <td><a href="#" class="modify" data=' + value.id + '>수정</a></td> \
+                    <td><a href="#" class="remove" data=' + value.id + '>삭제</a></td> \
+                    </tr>\
+                    ');
+            });
+            $(".modify").on("click", function (e) {
+                var id = $(e.currentTarget).attr("data");
+                window.location.href = "edit?id=" + id;
+            });
+            $(".remove").on("click", function (e) {
+                var target = e.currentTarget;
+                var id = $(target).attr("data");
+                var row = $(target).parent().parent();
+                $.ajax({
+                    url: host + '/' + id,
+                    method: 'DELETE',
+                    success: function (result) {
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+    });
+</script>
+</body>
+</html>
