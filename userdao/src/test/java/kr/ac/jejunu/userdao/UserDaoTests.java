@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -16,6 +15,8 @@ public class UserDaoTests {
 
     @Before
     public void setup() {
+//        ApplicationContext applicationContext =
+//                new ClassPathXmlApplicationContext("daoFactory.xml");
         ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext(DaoFactory.class);
         userDao = applicationContext.getBean("userDao", UserDao.class);

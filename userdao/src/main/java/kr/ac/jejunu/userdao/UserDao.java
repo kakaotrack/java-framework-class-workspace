@@ -1,16 +1,17 @@
 package kr.ac.jejunu.userdao;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
-    private final ConnectionMaker connectionMaker;
+    private final DataSource dataSource;
 
-    public UserDao(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
+    public UserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public User get(Long id) throws ClassNotFoundException, SQLException {
-        Connection connection = connectionMaker.getConnection();
+        Connection connection = dataSource.getConnection();
 
         PreparedStatement preparedStatement =
                 connection.prepareStatement("select * from userinfo where id = ?");
@@ -32,7 +33,7 @@ public class UserDao {
     }
 
     public Long add(User user) throws ClassNotFoundException, SQLException {
-        Connection connection = connectionMaker.getConnection();
+        Connection connection = dataSource.getConnection();
 
         PreparedStatement preparedStatement =
                 connection.prepareStatement
