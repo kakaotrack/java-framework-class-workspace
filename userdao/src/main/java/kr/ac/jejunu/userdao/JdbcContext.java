@@ -150,4 +150,14 @@ public class JdbcContext {
         };
         return jdbcContextForAdd(statementStrategy);
     }
+
+    User get(String sql, Object[] params) throws SQLException {
+        StatementStrategy statementStrategy = connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++)
+                preparedStatement.setObject(i + 1, params[i]);
+            return preparedStatement;
+        };
+        return jdbcContextForGet(statementStrategy);
+    }
 }
