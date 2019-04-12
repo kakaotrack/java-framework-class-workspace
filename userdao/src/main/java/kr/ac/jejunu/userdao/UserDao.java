@@ -1,7 +1,6 @@
 package kr.ac.jejunu.userdao;
 
-import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.SQLException;
 
 public class UserDao {
     private final JdbcContext jdbcContext;
@@ -11,28 +10,33 @@ public class UserDao {
     }
 
     public User get(Long id) throws SQLException {
-        StatementStrategy statementStrategy = new GetStatementStrategy(id);
-        return jdbcContext.jdbcContextForGet(statementStrategy);
+        String sql = "select * from userinfo where id = ?";
+        Object[] params = new Object[]{id};
+        return jdbcContext.get(sql, params);
     }
 
 
-    public Long add(User user) throws ClassNotFoundException, SQLException {
-        StatementStrategy statementStrategy = new AddStatementStrategy(user);
-        return jdbcContext.jdbcContextForAdd(statementStrategy);
+    public Long add(User user) throws SQLException {
+        String sql = "insert into userinfo(name, password) values (?, ?)";
+        Object[] params = new Object[]{user.getName(), user.getPassword()};
+        return jdbcContext.add(sql, params);
     }
 
 
     public void update(User user) throws SQLException {
-        StatementStrategy statementStrategy = new UpdateStatementStrategy(user);
-        jdbcContext.jdbcContextForUpdate(statementStrategy);
+        String sql = "update userinfo set name = ?, password = ? where id = ?";
+        Object[] params = new Object[]{user.getName(), user.getPassword(), user.getId()};
+        jdbcContext.update(sql, params);
     }
 
     public void delete(Long id) throws SQLException {
-        StatementStrategy statementStrategy = new DeleteStatementStrategy(id);
-        jdbcContext.jdbcContextForUpdate(statementStrategy);
+        String sql = "delete from userinfo where id = ?";
+        Object[] params = new Object[]{id};
+        jdbcContext.update(sql, params);
     }
 
 }
+
 
 
 
