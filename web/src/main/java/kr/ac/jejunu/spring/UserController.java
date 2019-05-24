@@ -9,10 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 
 @Controller
 @RequestMapping("/user")
+@SessionAttributes("user")
 public class UserController {
     @RequestMapping("/get")
     public ModelAndView get(@RequestParam("id") Integer id, @RequestParam("name") String name, HttpServletResponse response) {
@@ -24,6 +26,12 @@ public class UserController {
         return modelAndView;
     }
 
+    @GetMapping
+    public User sattr() {
+        User user = User.builder().id(1).name("s attr").password("fjfjf").build();
+        return user;
+    }
+
     @RequestMapping("/user")
     public String model(User user){
         return "user";
@@ -32,6 +40,21 @@ public class UserController {
     @RequestMapping("/redirect")
     public String redirect() {
         return "redirect:/user/upload";
+    }
+
+    @GetMapping("/session")
+    public String session(HttpSession session) {
+        User user = User.builder().id(10).name("session").password("111").build();
+        session.setAttribute("user", user);
+        return "redirect:/user/getSession";
+    }
+
+    @GetMapping("/getSession")
+    public ModelAndView getSession(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        ModelAndView modelAndView = new ModelAndView("user");
+        modelAndView.addObject("user", user);
+        return modelAndView;
     }
 
     @RequestMapping("/forward")
