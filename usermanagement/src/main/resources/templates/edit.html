@@ -1,0 +1,77 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>사용자 관리</title>
+    <link href="/menu.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="/jquery.min.js"></script>
+</head>
+<body>
+<div id="Header">
+    사용자 관리
+</div>
+<div id="Menu">
+    <a href="/list">목록보기</a><br/>
+    <a href="/create">생성하기</a>
+</div>
+<div id="Content">
+    <input id="id" type="hidden" name="id"/>
+    <form onsubmit="return save()">
+        <fieldset>
+            <legend>사용자 등록</legend>
+            <p>
+                <label>이름</label>
+                <input id="name" name="name"/>
+            </p>
+            <p>
+                <label>암호</label>
+                <input id="password" type="password" name="password"/>
+            </p>
+            <p>
+                <input type="submit" value="저장"/>
+            </p>
+        </fieldset>
+    </form>
+</div>
+<script>
+
+    function getUrlParams() {
+        var params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+            params[key] = value;
+        });
+        return params;
+    }
+
+    function save() {
+        var user = {
+            id: $('#id').val(),
+            name: $('#name').val(),
+            password: $('#password').val()
+        };
+        $.ajax({
+            url: "/api/save",
+            type: getUrlParams().id ? "PUT" : "POST",
+            data: JSON.stringify(user),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                window.location.href = "/list";
+            }
+        });
+
+        return false;
+    }
+
+    $(document).ready(function () {
+        var params = getUrlParams();
+        if (params.id) {
+            $.get("/api/get/" + params.id, function (user) {
+                $('#id').val(user.id);
+                $('#name').val(user.name);
+                $('#password').val('');
+            });
+        }
+    });
+</script>
+</body>
+</html>
