@@ -14,7 +14,13 @@ test {
     useJUnitPlatform()
 }
 
+ext {
+    springVersion = '5.2.5.RELEASE'
+}
+
 dependencies {
+    implementation "org.springframework:spring-core:${springVersion}"
+    implementation "org.springframework:spring-context:${springVersion}"
     runtimeOnly 'mysql:mysql-connector-java:8.0.19'
     testImplementation 'org.hamcrest:hamcrest:2.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
