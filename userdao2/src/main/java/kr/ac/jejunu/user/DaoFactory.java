@@ -20,10 +20,10 @@ public class DaoFactory {
     @Value("${db.password}")
     private String password;
 
-    @Bean
-    public UserDao userDao() {
-        return new UserDao(jdbcContext());
-    }
+//    @Bean
+//    public UserDao userDao() {
+//        return new UserDao(jdbcContext());
+//    }
 
     @Bean
     public JdbcTemplate jdbcContext() {

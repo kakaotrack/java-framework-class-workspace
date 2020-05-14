@@ -19,6 +19,7 @@ ext {
 }
 
 dependencies {
+    implementation 'org.codehaus.groovy:groovy:3.0.3'
     implementation "org.springframework:spring-core:${springVersion}"
     implementation "org.springframework:spring-context:${springVersion}"
     implementation "org.springframework:spring-jdbc:${springVersion}"
