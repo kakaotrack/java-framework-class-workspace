@@ -1,12 +1,9 @@
 package kr.ac.jejunu;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class UserDao {
-    public User findById(Integer id) {
+    public User findById(Integer id) throws ClassNotFoundException, SQLException {
         //데이터 어딨어? => mysql
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection =
@@ -20,6 +17,15 @@ public class UserDao {
         );
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        User user = new User();
+        user.setId(resultSet.getInt("id"));
+        user.setName(resultSet.getString("name"));
+        user.setPassword(resultSet.getString("password"));
+        resultSet.close();
+        preparedStatement.close();
+        connection.close();
+        return user;
     }
 }
 
