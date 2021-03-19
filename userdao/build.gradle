@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group = 'kr.ac.jejunu'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    runtimeOnly 'mysql:mysql-connector-java:8.0.23'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.4.2"
+}

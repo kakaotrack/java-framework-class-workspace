@@ -1,0 +1,42 @@
+<project name="userdao" default="dist" basedir=".">
+    <description>
+        userdao build file
+    </description>
+
+    <property name="src" location="src"/>
+    <property name="build" location="out/build"/>
+    <property name="dist" location="out/build"/>
+    <property name="lib" location="lib"/>
+
+    <path id="classpath">
+        <fileset dir="${lib}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+
+    <target name="init" depends="clean">
+        <tstamp/>
+        <mkdir dir="${build}"/>
+    </target>
+
+    <target name="compile" depends="init"
+            description="compile the source">
+        <!-- Compile the java code from ${src} into ${build} -->
+        <javac srcdir="${src}" destdir="${build}">
+            <classpath refid="classpath" />
+        </javac>
+    </target>
+
+    <target name="dist" depends="compile"
+            description="generate the distribution">
+        <jar jarfile="${dist}/userdao-${DSTAMP}.jar" basedir="${build}"/>
+    </target>
+
+    <target name="clean"
+            description="clean up">
+        <!-- Delete the ${build} and ${dist} directory trees -->
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
+</project>
