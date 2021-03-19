@@ -2,6 +2,9 @@ package kr.ac.jejunu;
 
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+
 public class UserDaoTests {
     @Test
     public void get() {
