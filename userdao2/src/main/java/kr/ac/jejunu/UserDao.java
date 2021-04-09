@@ -1,31 +1,32 @@
 package kr.ac.jejunu;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+
 import java.sql.*;
 
 public class UserDao {
-    private final JdbcContext jdbcContext;
+    private final JdbcTemplate jdbcTemplate;
 
-    public UserDao(JdbcContext jdbcContext) {
-        this.jdbcContext = jdbcContext;
+    public UserDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     public User findById(Integer id) throws SQLException {
         //데이터 어딨어? => mysql
         String sql = "select * from  userinfo where id = ?";
         Object[] params = new Object[]{id};
-        return findById(sql, params);
-    }
-
-    private User findById(String sql, Object[] params) throws SQLException {
-        return jdbcContext.jdbcContextForFindById(connection -> {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    sql
-            );
-            for (int i = 0; i < params.length; i++) {
-                preparedStatement.setObject(i + 1, params[i]);
+        return jdbcTemplate.query(sql, rs -> {
+            User user = null;
+            if (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setPassword(rs.getString("password"));
             }
-            return preparedStatement;
-        });
+            return user;
+        }, id);
     }
 
 
@@ -33,7 +34,18 @@ public class UserDao {
         //데이터 어딨어? => mysql
         String sql = "insert into userinfo (name, password) values ( ?, ? )";
         Object[] params = new Object[]{user.getName(), user.getPassword()};
-        jdbcContext.insert(user, sql, params, this);
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(con -> {
+            PreparedStatement preparedStatement = con.prepareStatement(
+                    sql
+                    , Statement.RETURN_GENERATED_KEYS
+            );
+            for (int i = 0; i < params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
+            }
+            return preparedStatement;
+        }, keyHolder);
+        user.setId(keyHolder.getKey().intValue());
 
     }
 
@@ -41,7 +53,7 @@ public class UserDao {
         //데이터 어딨어? => mysql
         String sql = "update userinfo set name = ?, password = ? where id = ?";
         Object[] params = new Object[]{user.getName(), user.getPassword(), user.getId()};
-        jdbcContext.update(sql, params);
+        jdbcTemplate.update(sql, params);
 
     }
 
@@ -49,7 +61,7 @@ public class UserDao {
         //데이터 어딨어? => mysql
         String sql = "delete from userinfo where id = ?";
         Object[] params = new Object[]{id};
-        jdbcContext.update(sql, params);
+        jdbcTemplate.update(sql, params);
 
     }
 
