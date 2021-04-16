@@ -24,8 +24,8 @@ public class UserDaoTests {
 
     @BeforeAll
     public static void setup() throws ClassNotFoundException {
-        ClassPathXmlApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("daoFactory.xml");
+//        ClassPathXmlApplicationContext applicationContext =
+//                new ClassPathXmlApplicationContext("daoFactory.xml");
 //        StaticApplicationContext applicationContext =
 //                new StaticApplicationContext();
 //        BeanDefinition dataBeanDefinition = new RootBeanDefinition(SimpleDriverDataSource.class);
@@ -55,8 +55,8 @@ public class UserDaoTests {
 //                new RuntimeBeanReference("jdbcTemplate")
 //        );
 //        applicationContext.registerBeanDefinition("userDao", userDaoBeanDefinition);
-//        ApplicationContext applicationContext
-//                = new AnnotationConfigApplicationContext(DaoFactory.class);
+        ApplicationContext applicationContext
+                = new AnnotationConfigApplicationContext("kr.ac.jejunu");
         userDao = applicationContext.getBean("userDao", UserDao.class);
     }
 
