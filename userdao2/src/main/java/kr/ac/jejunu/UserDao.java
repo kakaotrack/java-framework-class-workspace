@@ -1,24 +1,22 @@
 package kr.ac.jejunu;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 @Component
+@RequiredArgsConstructor
 public class UserDao {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-//    public UserDao(JdbcTemplate jdbcTemplate) {
-//        this.jdbcTemplate = jdbcTemplate;
-//    }
+    private final JdbcTemplate jdbcTemplate;
 
     public User findById(Integer id) throws SQLException {
         //데이터 어딨어? => mysql

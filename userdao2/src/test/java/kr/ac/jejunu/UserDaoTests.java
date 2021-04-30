@@ -78,9 +78,7 @@ public class UserDaoTests {
         String name = "허윤호";
         String password = "1111";
 
-        User user = new User();
-        user.setName(name);
-        user.setPassword(password);
+        User user = User.builder().name(name).password(password).build();
         userDao.insert(user);
 
         User insertedUser = userDao.findById(user.getId());
@@ -100,6 +98,10 @@ public class UserDaoTests {
         user.setName(name);
         user.setPassword(password);
         userDao.insert(user);
+
+        System.out.println("*****************");
+        System.out.println(user);
+        System.out.println("*****************");
 
         user.setName("hulk");
         user.setPassword("1234");
