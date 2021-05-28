@@ -8,6 +8,7 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <context:component-scan base-package="kr.ac.jejunu"/>
+    <annotation-driven />
     <beans:bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <beans:property name="defaultViews">
             <beans:list>
@@ -22,4 +23,5 @@
             </beans:bean>
         </beans:property>
     </beans:bean>
+    <resources mapping="/images/**" location="/WEB-INF/static/" />
 </beans:beans>
