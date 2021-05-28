@@ -1,12 +1,10 @@
 package kr.ac.jejunu;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,21 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 
 @Controller
-@RequestMapping
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserDao userDao;
 
-    @RequestMapping("/user")
+    @GetMapping(value = "/user", params = "id=1")
     public User getUser(@RequestParam("id") Integer id) {
+        System.out.println("******** User **************");
         return userDao.findById(id);
     }
 
-    @RequestMapping(path = "/upload", method = RequestMethod.GET)
+    @GetMapping("/upload")
     public void upload() {
     }
 
-    @RequestMapping(path = "/upload", method = RequestMethod.POST)
+    @PostMapping("/upload")
     public ModelAndView upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
         String path = request.getServletContext().getRealPath("/")
                 + "/WEB-INF/static/" + file.getOriginalFilename();
