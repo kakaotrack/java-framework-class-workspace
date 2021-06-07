@@ -1,6 +1,6 @@
-package kr.ac.jejunu;
+package kr.ac.jeju.user2;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,14 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "userinfo")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String name;
-    private String password;
+    Integer id;
+    String name;
+    String password;
 }

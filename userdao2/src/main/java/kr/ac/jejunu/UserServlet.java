@@ -4,6 +4,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebListener;
+import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
 public class UserServlet extends GenericServlet {
@@ -25,7 +28,7 @@ public class UserServlet extends GenericServlet {
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
         System.out.println("*************** service *****************");
         Integer id = Integer.parseInt(req.getParameter("id"));
-        User user = userDao.findById(id);
+        User user = userDao.findById(id).orElse(null);
         res.setContentType("text/html; charset=UTF-8");
         StringBuffer response = new StringBuffer();
         response.append("<html>");

@@ -4,23 +4,31 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.Map;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping
 @RequiredArgsConstructor
 public class UserController {
     private final UserDao userDao;
 
-    @GetMapping(value = "/user", params = "id=1")
-    public User getUser(@RequestParam("id") Integer id) {
-        System.out.println("******** User **************");
-        return userDao.findById(id);
+    @GetMapping(value = "/user/{id}", produces = "application/json")
+    public User getUser(@PathVariable Integer id) {
+        User u = userDao.findById(id).orElse(null);
+        return u;
+    }
+
+    @GetMapping(value = "/user/session", produces = "application/json")
+    public User sessionUser(HttpSession session) {
+        return (User) session.getAttribute("user");
     }
 
     @GetMapping("/upload")
