@@ -4,3 +4,7 @@ spring:
         url: ${db.url}
         driver-class-name: com.mysql.cj.jdbc.Driver
         username: ${db.username}
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
