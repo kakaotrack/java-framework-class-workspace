@@ -1,0 +1,7 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: jeju
+        password: jejupw
+        url: jdbc:mysql://localhost/jeju?characterEncoding=utf-8&serverTimezone=UTC
+
