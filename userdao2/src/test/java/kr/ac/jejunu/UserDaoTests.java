@@ -1,6 +1,5 @@
 package kr.ac.jejunu;
 
-import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -16,7 +15,7 @@ public class UserDaoTests {
         String name = "hulk";
         String password = "1234";
 
-        UserDao userDao = new JejuUserDao();
+        UserDao userDao = new UserDao(new JejuConnectionMaker());
         User user = userDao.findById(id);
         assertThat(user.getId(), is(id));
         assertThat(user.getName(), is(name));
@@ -31,7 +30,7 @@ public class UserDaoTests {
         user.setName(name);
         user.setPassword(password);
 
-        UserDao userDao = new JejuUserDao();
+        UserDao userDao = new UserDao(new JejuConnectionMaker());
         userDao.insert(user);
 
         assertThat(user.getId(), greaterThan(0));
@@ -47,7 +46,7 @@ public class UserDaoTests {
         String name = "hulk";
         String password = "1111";
 
-        UserDao userDao = new HallaUserDao();
+        UserDao userDao = new UserDao(new HallaConnectionMaker());
         User user = userDao.findById(id);
         assertThat(user.getId(), is(id));
         assertThat(user.getName(), is(name));
@@ -62,7 +61,7 @@ public class UserDaoTests {
         user.setName(name);
         user.setPassword(password);
 
-        UserDao userDao = new HallaUserDao();
+        UserDao userDao = new UserDao(new HallaConnectionMaker());
         userDao.insert(user);
 
         assertThat(user.getId(), greaterThan(0));
