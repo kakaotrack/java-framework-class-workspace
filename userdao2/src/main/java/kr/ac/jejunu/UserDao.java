@@ -2,7 +2,7 @@ package kr.ac.jejunu;
 
 import java.sql.*;
 
-public class UserDao {
+public abstract class UserDao {
     public User findById(Integer id) throws ClassNotFoundException, SQLException {
         Connection connection = getConnection();
         //sql 작성
@@ -52,16 +52,8 @@ public class UserDao {
     }
 
 
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        //드라이버 로딩
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        //커넥션
-        return DriverManager.getConnection(
-                "jdbc:mysql://192.168.151.176:3306/jeju?serverTimezone=UTC",
-                "jeju",
-                "jejupw"
-        );
-    }
+    abstract public Connection getConnection() throws ClassNotFoundException, SQLException;
+
 }
 
 
