@@ -18,10 +18,8 @@ public class UserDao {
         try {
             connection = dataSource.getConnection();
             //sql 작성
-            preparedStatement = connection.prepareStatement(
-                    "select * from userinfo where id = ?"
-            );
-            preparedStatement.setInt(1, id);
+            StatementStrategy statementStrategy = new FindStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(id, connection);
             //sql 실행
             resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {
@@ -60,12 +58,8 @@ public class UserDao {
             //드라이버 로딩
             connection = dataSource.getConnection();
             //sql 작성
-            preparedStatement = connection.prepareStatement(
-                    "insert into userinfo(name, password) values ( ?, ? )"
-                    , Statement.RETURN_GENERATED_KEYS
-            );
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
+            StatementStrategy statementStrategy = new InsertStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(user, connection);
             //sql 실행
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
@@ -100,12 +94,9 @@ public class UserDao {
             //드라이버 로딩
             connection = dataSource.getConnection();
             //sql 작성
-            preparedStatement = connection.prepareStatement(
-                    "update userinfo set name = ?, password = ? where id = ?"
-            );
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setInt(3, user.getId());
+            StatementStrategy statementStrategy = new UpdateStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(user, connection);
+
             //sql 실행
             preparedStatement.executeUpdate();
         } finally {
@@ -129,10 +120,8 @@ public class UserDao {
             //드라이버 로딩
             connection = dataSource.getConnection();
             //sql 작성
-            preparedStatement = connection.prepareStatement(
-                    "delete from userinfo where id = ?"
-            );
-            preparedStatement.setInt(1, id);
+            StatementStrategy statementStrategy = new DeleteStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(id, connection);
             //sql 실행
             preparedStatement.executeUpdate();
         } finally {
@@ -148,6 +137,15 @@ public class UserDao {
             }
         }
     }
+
+//    public PreparedStatement makeStatement(Integer id, Connection connection) throws SQLException {
+//        PreparedStatement preparedStatement;
+//        preparedStatement = connection.prepareStatement(
+//                "delete from userinfo where id = ?"
+//        );
+//        preparedStatement.setInt(1, id);
+//        return preparedStatement;
+//    }
 }
 
 
