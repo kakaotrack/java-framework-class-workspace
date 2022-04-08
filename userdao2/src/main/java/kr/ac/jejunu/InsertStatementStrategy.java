@@ -6,9 +6,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class InsertStatementStrategy implements StatementStrategy {
+    private User user;
+    public InsertStatementStrategy(User user) {
+        this.user = user;
+    }
+
     @Override
-    public PreparedStatement makeStatement(Object obj, Connection connection) throws SQLException {
-        User user = (User) obj;
+    public PreparedStatement makeStatement(Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "insert into userinfo(name, password) values ( ?, ? )"
                 , Statement.RETURN_GENERATED_KEYS
