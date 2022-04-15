@@ -3,6 +3,7 @@ package kr.ac.jejunu;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
@@ -18,14 +19,14 @@ public class DaoFactory {
     private String username; //= "jeju";
     @Value("${db.password}")
     private String password; //= "jejupw";
-    @Bean
-    public UserDao userDao() throws ClassNotFoundException {
-        return new UserDao(jdbcContext());
-    }
+//    @Bean
+//    public UserDao userDao() throws ClassNotFoundException {
+//        return new UserDao(new JdbcTemplate(dataSource()));
+//    }
 
     @Bean
-    public JdbcContext jdbcContext() throws ClassNotFoundException {
-        return new JdbcContext(dataSource());
+    public JdbcTemplate jdbcTemplate() throws ClassNotFoundException {
+        return new JdbcTemplate(dataSource());
     }
 
     @Bean
