@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
 group 'org.example'
@@ -14,6 +15,7 @@ ext {
 }
 
 dependencies {
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
     implementation "org.springframework:spring-core:${springVersion}"
     implementation "org.springframework:spring-context:${springVersion}"
     implementation "org.springframework:spring-jdbc:${springVersion}"
