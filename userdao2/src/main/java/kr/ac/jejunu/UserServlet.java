@@ -21,6 +21,9 @@ public class UserServlet extends GenericServlet {
 
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+        res.setContentType("text/html;charset=UTF-8");
+        String html = "<html><h1>Hi 허윤호</h1></html>";
+        res.getWriter().println(html);
         System.out.println("********* service ***********");
     }
 }
