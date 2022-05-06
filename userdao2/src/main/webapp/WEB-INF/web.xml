@@ -3,14 +3,33 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
    http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/root-context.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
     <servlet>
-        <servlet-name>userServlet</servlet-name>
-        <servlet-class>kr.ac.jejunu.UserServlet</servlet-class>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
+        <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>userServlet</servlet-name>-->
+<!--        <servlet-class>kr.ac.jejunu.UserServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>userServlet</servlet-name>-->
+<!--        <url-pattern>/</url-pattern>-->
+<!--    </servlet-mapping>-->
     <filter>
         <filter-name>userFilter</filter-name>
         <filter-class>kr.ac.jejunu.UserFilter</filter-class>
