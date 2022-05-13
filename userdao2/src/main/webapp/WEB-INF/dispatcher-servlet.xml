@@ -8,8 +8,9 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
 ">
+    <annotation-driven />
     <context:component-scan base-package="kr.ac.jejunu" />
-    <beans:bean name="/user" class="kr.ac.jejunu.SimpleController"/>
+    <beans:bean name="/user3" class="kr.ac.jejunu.SimpleController"/>
 
 <!--    <beans:bean name="simpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
 <!--        <beans:property name="mappings">-->
@@ -32,5 +33,6 @@
             </beans:bean>
         </beans:property>
     </beans:bean>
+    <resources mapping="/images/**" location="/WEB-INF/static/" />
 
 </beans:beans>
