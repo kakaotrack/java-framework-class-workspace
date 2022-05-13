@@ -1,6 +1,7 @@
 package kr.ac.jejunu;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +19,13 @@ public class UserController {
         user.setName(name);
         ModelAndView modelAndView = new ModelAndView("user");
         modelAndView.addObject(user);
+        return modelAndView;
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView error(Exception e) {
+        ModelAndView modelAndView = new ModelAndView("error");
+        modelAndView.addObject("e", e);
         return modelAndView;
     }
 }
