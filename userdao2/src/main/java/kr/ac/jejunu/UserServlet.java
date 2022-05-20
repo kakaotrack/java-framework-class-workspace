@@ -8,8 +8,10 @@ import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
+@WebServlet(urlPatterns = "/servlet/user")
 public class UserServlet extends GenericServlet {
     private UserDao userDao;
     @Override
