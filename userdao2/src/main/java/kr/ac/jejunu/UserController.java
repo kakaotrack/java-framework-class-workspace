@@ -28,6 +28,12 @@ public class UserController {
         return modelAndView;
     }
 
+    @GetMapping(value = "modelattribute")
+    public String modelAttribute(User user) {
+        user.setName("허윤호");
+        return "forward:/upload";
+    }
+
     @GetMapping("/upload")
     public void upload() {
 
