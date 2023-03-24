@@ -12,6 +12,6 @@ public class HallaUserDao extends UserDao {
         Class.forName("com.mysql.cj.jdbc.Driver");
         //Connection 맺고
         return DriverManager.getConnection
-                ("jdbc:mysql://localhost/halla", "jeju", "jejupw");
+                ("jdbc:mysql://192.168.151.175/halla", "jeju", "jejupw");
     }
 }
