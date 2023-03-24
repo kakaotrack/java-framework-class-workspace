@@ -2,14 +2,11 @@ package kr.ac.jejunu.user;
 
 import java.sql.*;
 
-public class UserDao {
+public abstract class UserDao {
     public User findById(Long id) throws ClassNotFoundException, SQLException {
         //데이터 어딨어? mysql
         //mysql 클래스 로딩
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        //Connection 맺고
-        Connection connection = DriverManager.getConnection
-                ("jdbc:mysql://localhost/jeju", "jeju", "jejupw");
+        Connection connection = getConnection();
         //쿼리 만들고
         PreparedStatement preparedStatement = connection.prepareStatement
                 ("select id, name, password from userinfo where id = ?");
@@ -32,12 +29,7 @@ public class UserDao {
     }
 
     public void insert(User user) throws ClassNotFoundException, SQLException {
-        //데이터 어딨어? mysql
-        //mysql 클래스 로딩
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        //Connection 맺고
-        Connection connection = DriverManager.getConnection
-                ("jdbc:mysql://localhost/jeju", "jeju", "jejupw");
+        Connection connection = getConnection();
         //쿼리 만들고
         PreparedStatement preparedStatement = connection.prepareStatement
                 ("insert into userinfo (name, password) values ( ?, ? )"
@@ -54,6 +46,16 @@ public class UserDao {
         preparedStatement.close();
         connection.close();
     }
+
+    abstract public Connection getConnection() throws ClassNotFoundException, SQLException ;
+//    private Connection getConnection() throws ClassNotFoundException, SQLException {
+//        //데이터 어딨어? mysql
+//        //mysql 클래스 로딩
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        //Connection 맺고
+//        return DriverManager.getConnection
+//                ("jdbc:mysql://localhost/jeju", "jeju", "jejupw");
+//    }
 }
 
 
