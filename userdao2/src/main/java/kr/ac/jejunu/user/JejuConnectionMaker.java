@@ -12,6 +12,6 @@ public class JejuConnectionMaker implements ConnectionMaker {
         Class.forName("com.mysql.cj.jdbc.Driver");
         //Connection 맺고
         return DriverManager.getConnection
-                ("jdbc:mysql://192.168.151.175/jeju", "jeju", "jejupw");
+                ("jdbc:mysql://localhost/jeju", "jeju", "jejupw");
     }
 }
