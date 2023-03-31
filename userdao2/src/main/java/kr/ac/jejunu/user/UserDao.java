@@ -1,18 +1,19 @@
 package kr.ac.jejunu.user;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
-    private final ConnectionMaker connectionMaker;
+    private final DataSource dataSource;
 
-    public UserDao(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
+    public UserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public User findById(Long id) throws ClassNotFoundException, SQLException {
         //데이터 어딨어? mysql
         //mysql 클래스 로딩
-        Connection connection = connectionMaker.getConnection();
+        Connection connection = dataSource.getConnection();
         //쿼리 만들고
         PreparedStatement preparedStatement = connection.prepareStatement
                 ("select id, name, password from userinfo where id = ?");
@@ -35,7 +36,7 @@ public class UserDao {
     }
 
     public void insert(User user) throws ClassNotFoundException, SQLException {
-        Connection connection = connectionMaker.getConnection();
+        Connection connection = dataSource.getConnection();
         //쿼리 만들고
         PreparedStatement preparedStatement = connection.prepareStatement
                 ("insert into userinfo (name, password) values ( ?, ? )"
