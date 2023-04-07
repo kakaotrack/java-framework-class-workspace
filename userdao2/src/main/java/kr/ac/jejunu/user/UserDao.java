@@ -84,43 +84,23 @@ public class UserDao {
     }
 
     public void update(User user) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = dataSource.getConnection();
-            //쿼리 만들고
-            preparedStatement = connection.prepareStatement
-                    ("update userinfo set name = ?, password = ? where id = ?");
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setLong(3, user.getId());
-            //쿼리 실행하고
-            preparedStatement.executeUpdate();
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        StatementStrategy statementStrategy = new UpdateStatementStrategy(user);
+        jdbcContextForUpdate(statementStrategy);
 
     }
 
     public void delete(Long id) throws SQLException {
+        StatementStrategy statementStrategy = new DeleteStatementStrategy(id);
+        jdbcContextForUpdate(statementStrategy);
+
+    }
+
+    private void jdbcContextForUpdate(StatementStrategy statementStrategy) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
             connection = dataSource.getConnection();
-            //쿼리 만들고
-            preparedStatement = connection.prepareStatement
-                    ("delete from userinfo where id = ?");
-            preparedStatement.setLong(1, id);
-            //쿼리 실행하고
+            preparedStatement = statementStrategy.makeStatement(connection);
             preparedStatement.executeUpdate();
         } finally {
             try {
@@ -134,7 +114,6 @@ public class UserDao {
                 e.printStackTrace();
             }
         }
-
     }
 }
 
