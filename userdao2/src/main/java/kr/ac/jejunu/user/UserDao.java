@@ -18,7 +18,7 @@ public class UserDao {
     public void insert(User user) throws SQLException {
         String sql = "insert into userinfo (name, password) values ( ?, ? )";
         Object[] params = new Object[] {user.getName(), user.getPassword()};
-        jdbcContext.insert(user, sql, params, this);
+        jdbcContext.insert(user, sql, params);
     }
 
     public void update(User user) throws SQLException {
