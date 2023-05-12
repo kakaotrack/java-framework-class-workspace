@@ -16,7 +16,7 @@ import java.sql.*;
 @RequiredArgsConstructor
 public class UserDao {
     private final JdbcTemplate jdbcTemplate;
-    public User findById(Long id) throws SQLException {
+    public User findById(Long id) {
         String sql = "select id, name, password from userinfo where id = ?";
         Object[] params = new Object[]{id};
         return jdbcTemplate.query(sql, rs -> {
