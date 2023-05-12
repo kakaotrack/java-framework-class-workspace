@@ -20,11 +20,11 @@ public class DaoFactory {
     @Value("${db.url}")
     private String url;
 
-    @Bean
-    public UserDao userDao() throws ClassNotFoundException {
-        UserDao userDao = new UserDao(jdbcTemplate());
-        return userDao;
-    }
+//    @Bean
+//    public UserDao userDao() throws ClassNotFoundException {
+//        UserDao userDao = new UserDao(jdbcTemplate());
+//        return userDao;
+//    }
 
     @Bean
     public JdbcTemplate jdbcTemplate() throws ClassNotFoundException {
