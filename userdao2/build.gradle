@@ -30,6 +30,10 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testImplementation 'org.hamcrest:hamcrest:2.2'
     runtimeOnly 'mysql:mysql-connector-java:8.0.32'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.1'
+
 }
 
 test {

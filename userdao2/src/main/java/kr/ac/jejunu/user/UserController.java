@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping
 @RequiredArgsConstructor
 public class UserController {
     private final UserDao userDao;
 
-    @RequestMapping
+    @RequestMapping(path = "/user", produces = "text/html")
     public User getUser(@RequestParam Long id) {
         return userDao.findById(id);
     }

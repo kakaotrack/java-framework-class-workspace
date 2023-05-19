@@ -9,12 +9,8 @@
        http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
 ">
     <context:component-scan base-package="kr.ac.jejunu.user" />
-    <beans:bean name="/user" class="kr.ac.jejunu.user.SimpleController">
+    <beans:bean name="/simple" class="kr.ac.jejunu.user.SimpleController">
         <beans:constructor-arg name="userDao" ref="userDao" />
-    </beans:bean>
-    <beans:bean name="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <beans:property name="prefix" value="/WEB-INF/views/" />
-        <beans:property name="suffix" value=".jsp" />
     </beans:bean>
 <!--        <beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
 <!--            <beans:property name="mappings">-->
@@ -26,5 +22,21 @@
 <!--        </beans:bean>-->
 <!--    <beans:bean class="org.springframework.web.servlet.handler.SimpleServletHandlerAdapter" />-->
 
+    <beans:bean name="contentNegotiationViewResolver"
+                class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <beans:property name="defaultViews">
+            <beans:list>
+                <beans:bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+                <beans:bean class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView" />
+            </beans:list>
+        </beans:property>
+        <beans:property name="viewResolvers">
+            <beans:bean name="viewResolver"
+                        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                <beans:property name="prefix" value="/WEB-INF/views/" />
+                <beans:property name="suffix" value=".jsp" />
+            </beans:bean>
+        </beans:property>
+    </beans:bean>
 
 </beans:beans>
