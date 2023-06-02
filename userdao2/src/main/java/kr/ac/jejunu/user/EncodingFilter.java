@@ -1,9 +1,11 @@
 package kr.ac.jejunu.user;
 
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
 
 import java.io.IOException;
 
+@WebFilter(urlPatterns = "*")
 public class EncodingFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

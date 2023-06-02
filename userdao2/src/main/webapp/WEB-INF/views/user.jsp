@@ -4,6 +4,6 @@
     <title>Hello</title>
 </head>
 <body>
-    Hi ${user.name}
+    Hi ${user.name} - ID(${user.id})
 </body>
 </html>

@@ -2,7 +2,9 @@ package kr.ac.jejunu.user;
 
 import jakarta.servlet.ServletRequestEvent;
 import jakarta.servlet.ServletRequestListener;
+import jakarta.servlet.annotation.WebListener;
 
+@WebListener
 public class UserRequestListener implements ServletRequestListener {
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {

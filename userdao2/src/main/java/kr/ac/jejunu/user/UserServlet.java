@@ -1,6 +1,7 @@
 package kr.ac.jejunu.user;
 
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 
 @Controller("/servlet")
+@WebServlet(urlPatterns = "/servlet")
 public class UserServlet extends GenericServlet {
     @Autowired
     private UserDao userDao;
