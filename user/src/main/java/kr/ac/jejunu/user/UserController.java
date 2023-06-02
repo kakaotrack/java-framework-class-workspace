@@ -1,10 +1,14 @@
 package kr.ac.jejunu.user;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/user")
@@ -16,5 +20,15 @@ public class UserController {
         return userDao.findById(id).get();
     }
 
+    @PostMapping("/upload")
+    public String upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+        File path = new File(request.getServletContext().getRealPath("/") + "/static/");
+//        path.mkdir();
+        FileOutputStream fileOutputStream = new FileOutputStream(path + file.getOriginalFilename());
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+        bufferedOutputStream.write(file.getBytes());
+        bufferedOutputStream.close();
 
+        return "http://localhost:8080/" + file.getOriginalFilename();
+    }
 }
